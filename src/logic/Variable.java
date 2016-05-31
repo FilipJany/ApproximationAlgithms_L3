@@ -1,53 +1,51 @@
 package logic;
 
-import logic.enums.Value;
-
 /**
- * Created by FiFi on 18.05.2016.
+ * Created by FiFi on 30.05.2016.
  */
 public class Variable
 {
     private final int id;
-    private Value value;
-    private boolean negative;
+    private boolean value;
+    private boolean negated;
 
     public Variable(int id)
     {
         this.id = id;
-        this.value = Value.Undefined;
-        this.negative = false;
+        value = false;
+        negated = false;
     }
 
-    public Variable(int id, Value value)
+    public Variable(int id, boolean negated)
+    {
+        this.id = id;
+        value = false;
+        this.negated = negated;
+    }
+
+    public Variable(int id, boolean value, boolean negated)
     {
         this.id = id;
         this.value = value;
-        this.negative = false;
+        this.negated = negated;
     }
 
-    public Variable(int id, Value value, boolean negative)
-    {
-        this.id = id;
-        this.value = value;
-        this.negative = negative;
-    }
+    public int getID() { return id; }
+    public boolean getValue() { return value; }
+    public boolean isNegated() { return negated; }
 
-    public int GetID() { return id; }
-    public Value GetValue() { return value; }
-    public void GetValue(Value value) { this.value = value; }
-    public void ChangeValueTo(Value value) { this.value = value; }
-    public void SwapNegative() { this.negative = !negative; }
-    public Variable SetNegative(boolean negative)
+    public void setValue(boolean value) { this.value = value; }
+    public Variable setNegated(boolean value)
     {
-        this.negative = negative;
+        this.negated = value;
         return this;
     }
 
     @Override
     public String toString()
     {
-        if(negative)
-            return "~x" + id;
-        return "x" + id;
+        if(negated)
+            return ("~X" + id);
+        return ("X" + id);
     }
 }

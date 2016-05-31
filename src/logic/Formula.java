@@ -4,36 +4,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by FiFi on 18.05.2016.
+ * Created by FiFi on 30.05.2016.
  */
 public class Formula
 {
-    private List<Clausule> clausules;
+    private List<Clause> clauses;
+    private List<Variable> availableVariables;
 
     public Formula()
     {
-        clausules = new ArrayList<>();
+        clauses = new ArrayList<>();
+        availableVariables = new ArrayList<>();
     }
 
-    public Formula AddClausule(Clausule c)
+    public List<Clause> getClauses() { return clauses; }
+    public List<Variable> getVariables() { return availableVariables; }
+
+    public void setVariables(List<Variable> variables)
     {
-        clausules.add(c);
-        return this;
+        this.availableVariables = variables;
     }
 
-    public Formula RemoveClausule(Clausule c)
+    public void setClauses(List<Clause> clauses)
     {
-        clausules.remove(c);
-        return this;
+        this.clauses = clauses;
+    }
+
+    private boolean getVariableValue(Variable var)
+    {
+        for (Variable v : availableVariables)
+            if(v.getID() == var.getID())
+                return v.getValue();
+        return false;//ni hu hu
+    }
+
+    public List<Clause> getSatisfiedClauses()
+    {
+        List<Clause> satisfiedClauses = new ArrayList<>();
+        for (Clause c : clauses)
+        {
+            boolean satisfied = true;
+            for (Variable v : c.getVariables())
+            {
+                if(v.isNegated())
+                    satisfied &= !getVariableValue(v);
+                else
+                    satisfied &= getVariableValue(v);
+            }
+            if(satisfied)
+                satisfiedClauses.add(c);
+        }
+        return satisfiedClauses;
     }
 
     @Override
     public String toString()
     {
         StringBuilder builder = new StringBuilder("[");
-        for (int i = 0; i < clausules.size()-1; ++i)
-            builder.append(clausules.get(i).toString() + "/\\");
-        builder.append(clausules.get(clausules.size()-1) + "]");
+        for(int i = 0; i < clauses.size()-1; ++i)
+            builder.append(clauses.get(i).toString() + "/\\");
+        builder.append(clauses.get(clauses.size()-1).toString() + "]");
         return builder.toString();
     }
 }
