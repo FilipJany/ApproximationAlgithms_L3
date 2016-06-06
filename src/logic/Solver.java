@@ -1,8 +1,6 @@
 package logic;
 
-import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
 /**
@@ -24,8 +22,7 @@ public class Solver
             formula.getVariables().get(i).setValue(random.nextBoolean());
     }
 
-    public void solve()
-    {
+    public void solve() {
         randomize();
         int totalValue = 0;
         for (Clause c : formula.getSatisfiedClauses())

@@ -62,7 +62,7 @@ public class Formula
     {
         StringBuilder builder = new StringBuilder("[");
         for(int i = 0; i < clauses.size()-1; ++i)
-            builder.append(clauses.get(i).toString() + "/\\");
+            builder.append(clauses.get(i).toString() + " /\\ ");
         builder.append(clauses.get(clauses.size()-1).toString() + "]");
         return builder.toString();
     }

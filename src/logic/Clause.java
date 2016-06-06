@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * We assume that clause does not contain doubled variables.
+ *
  * Created by FiFi on 30.05.2016.
  */
 public class Clause

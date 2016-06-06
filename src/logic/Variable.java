@@ -42,6 +42,20 @@ public class Variable
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Variable))
+            return false;
+        return id == ((Variable) obj).getID();
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
     public String toString()
     {
         if(negated)

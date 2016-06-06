@@ -1,9 +1,6 @@
 package main;
 
-import logic.Clause;
-import logic.Formula;
-import logic.Solver;
-import logic.Variable;
+import logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +45,11 @@ public class Main
             System.out.println(f);
             Solver solver = new Solver(f);
             solver.solve();
+
+            System.out.println("---");
+
+            DerandomizedSolver derandSolver = new DerandomizedSolver(f);
+            derandSolver.solve();
         }
         catch (Exception e)
         {
